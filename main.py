@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
-"""The Worst App Idea Ever Pitched (make.fun).
+"""The Worst App Idea Ever Pitched — a make.fun one-line entry."""
 
-Writes the entry to /output/entry.txt, where the sealed scorer reads it.
-"""
+from pathlib import Path
 
-import os
+ENTRY = "UmbrellaShare lets strangers rent your umbrella by the minute, then charges you a fee when it rains on their side of the street."
 
-TEXT = "Meet Shelfie: an app that photographs your bookshelf, judges your taste in real time, and charges you a monthly fee to be told, by a stranger's algorithm, that you will never finish 'Infinite Jest.'"
+OUTPUT = Path("/output/entry.txt")
 
 
-def main():
-    os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8") as f:
-        f.write(TEXT)
+def write_entry() -> None:
+    text = ENTRY.strip()
+    assert text, "entry must not be blank"
+    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    OUTPUT.write_text(text, encoding="utf-8")
 
 
 if __name__ == "__main__":
-    main()
+    write_entry()
